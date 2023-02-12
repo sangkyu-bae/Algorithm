@@ -25,11 +25,12 @@
 <h5>제한 사항</h5>
 
 <ul>
-<li>2 ≤ <code>weights</code> ≤ 100,000</li>
+<li>2 ≤ <code>weights</code>의 길이 ≤ 100,000</li>
 <li>100 ≤ <code>weights</code>[i] ≤ 1,000
 
 <ul>
 <li>몸무게 단위는 N(뉴턴)으로 주어집니다.</li>
+<li>몸무게는 모두 정수입니다.</li>
 </ul></li>
 </ul>
 

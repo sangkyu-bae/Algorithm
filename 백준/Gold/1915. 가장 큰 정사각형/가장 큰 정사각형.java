@@ -3,7 +3,8 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
+ 
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int m = sc.nextInt();
@@ -16,14 +17,15 @@ public class Main {
                 arr[i][j] = s.charAt(j - 1) -'0';
             }
         }
+
+
         int answer = 0;
+
+
         for(int i = 1; i <= n;i++){
             for(int j = 1; j <= m ;j++){
                 if(arr[i][j] == 1){
-                    int case1  = dp[i-1][j-1];
-                    int case2 = dp[i-1][j];
-                    int case3 = dp[i][j-1];
-                    dp[i][j] = Math.min(case1,Math.min(case2,case3))+1;
+                    dp[i][j] = Math.min(dp[i][j-1],Math.min(dp[i-1][j-1],dp[i-1][j]))+1;
                     answer = Math.max(dp[i][j], answer);
                 }
             }
@@ -32,3 +34,4 @@ public class Main {
         System.out.println(answer * answer);
     }
 }
+

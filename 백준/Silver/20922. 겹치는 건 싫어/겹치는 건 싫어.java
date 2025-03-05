@@ -1,9 +1,5 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -13,29 +9,31 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
 
-        int[] A = new int[N];
+        int[] map = new int[N];
+        int[] count = new int[100001]; // 숫자의 등장 횟수를 저장할 배열
 
         st = new StringTokenizer(br.readLine());
-
         for (int i = 0; i < N; i++) {
-            A[i] = Integer.parseInt(st.nextToken());
+            map[i] = Integer.parseInt(st.nextToken());
         }
 
-        int maxLength = 1;
-        int left = 0;
-        int right = 0;
-        Map<Integer, Integer> map = new HashMap<>();
+        int start = 0, end = 0, result = 0;
 
-        while (right < N) {
-            if (map.getOrDefault(A[right], 0) + 1 <= K) {
-                map.put(A[right], map.getOrDefault(A[right], 0) + 1);
-                maxLength = Math.max(maxLength, right - left + 1);
-                right++;
-            } else {
-                map.put(A[left], map.get(A[left]) - 1);
-                left++;
+        while (end < N) {
+            // 현재 숫자의 개수가 K 이상이면 start를 이동
+            while (end < N && count[map[end]] < K) {
+                count[map[end]]++;
+                end++;
             }
+
+            // 최장 연속 부분 수열 길이 갱신
+            result = Math.max(result, end - start);
+
+            // start를 이동하며 현재 수 제거
+            count[map[start]]--;
+            start++;
         }
-        System.out.println(maxLength);
+
+        System.out.println(result);
     }
 }
